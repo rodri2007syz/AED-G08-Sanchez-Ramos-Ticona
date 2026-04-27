@@ -44,5 +44,45 @@ public class ColaReproduccion<T> {
         }
         return actual != null ? actual.valor : null;
     }
+    public void mezclar() {
+        if (head == null) return;
+
+        ArrayList<NodeDoble<T>> lista = new ArrayList<>();
+        NodeDoble<T> temp = head;
+
+        while (temp != null) {
+            lista.add(temp);
+            temp = temp.next;
+        }
+
+        Collections.shuffle(lista);
+
+        head = lista.get(0);
+        head.prev = null;
+
+        NodeDoble<T> actualNodo = head;
+
+        for (int i = 1; i < lista.size(); i++) {
+            NodeDoble<T> siguiente = lista.get(i);
+            actualNodo.next = siguiente;
+            siguiente.prev = actualNodo;
+            actualNodo = siguiente;
+        }
+
+        tail = actualNodo;
+        tail.next = null;
+    }
+
+    public int duracionTotal() {
+        int total = 0;
+        NodeDoble<T> temp = head;
+
+        while (temp != null) {
+            total += ((Cancion) temp.valor).getDuracionSeg();
+            temp = temp.next;
+        }
+
+        return total;
+    }
 
 }
