@@ -28,4 +28,21 @@ public class ColaReproduccion<T> {
             i++;
         }
     }
+    
+    public T reproducirSiguiente() {
+        if (actual == null) {
+            actual = head;
+        } else if (actual.next != null) {
+            actual = actual.next;
+        }
+        return actual != null ? actual.valor : null;
+    }
+
+    public T reproducirAnterior() {
+        if (actual != null && actual.prev != null) {
+            actual = actual.prev;
+        }
+        return actual != null ? actual.valor : null;
+    }
+
 }
