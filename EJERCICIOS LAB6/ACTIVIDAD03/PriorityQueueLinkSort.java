@@ -27,13 +27,11 @@ class PriorityQueueLinkSort<E, N extends Comparable<N>> implements PriorityQueue
         EntryNode nuevoDato = new EntryNode(x, pr);
         Node<EntryNode> nuevo = new Node<>(nuevoDato);
 
-        // si está vacío
         if (isEmpty()) {
             first = last = nuevo;
             return;
         }
 
-        // si tiene mayor prioridad que el primero
         if (pr.compareTo(first.getData().priority) > 0) {
             nuevo.setNext(first);
             first = nuevo;
@@ -42,7 +40,6 @@ class PriorityQueueLinkSort<E, N extends Comparable<N>> implements PriorityQueue
 
         Node<EntryNode> aux = first;
 
-        // busco posición según prioridad
         while (aux.getNext() != null &&
                pr.compareTo(aux.getNext().getData().priority) <= 0) {
             aux = aux.getNext();
@@ -51,14 +48,64 @@ class PriorityQueueLinkSort<E, N extends Comparable<N>> implements PriorityQueue
         nuevo.setNext(aux.getNext());
         aux.setNext(nuevo);
 
-        // si se insertó al final
         if (nuevo.getNext() == null) {
             last = nuevo;
         }
     }
 
     @Override
+    public E dequeue() throws ExceptionIsEmpty {
+        if (isEmpty())
+            throw new ExceptionIsEmpty("Queue vacía");
+
+        // siempre sale el de mayor prioridad (inicio)
+        E dato = first.getData().data;
+        first = first.getNext();
+
+        if (first == null)
+            last = null;
+
+        return dato;
+    }
+
+    @Override
+    public E front() throws ExceptionIsEmpty {
+        if (isEmpty())
+            throw new ExceptionIsEmpty("Queue vacía");
+
+        // mayor prioridad
+        return first.getData().data;
+    }
+
+    @Override
+    public E back() throws ExceptionIsEmpty {
+        if (isEmpty())
+            throw new ExceptionIsEmpty("Queue vacía");
+
+        // menor prioridad
+        return last.getData().data;
+    }
+
+    @Override
     public boolean isEmpty() {
         return first == null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Node<EntryNode> aux = first;
+
+        // recorro en orden de prioridad
+        while (aux != null) {
+            sb.append("(")
+              .append(aux.getData().data)
+              .append(", p=")
+              .append(aux.getData().priority)
+              .append(") -> ");
+            aux = aux.getNext();
+        }
+
+        return sb.toString();
     }
 }
