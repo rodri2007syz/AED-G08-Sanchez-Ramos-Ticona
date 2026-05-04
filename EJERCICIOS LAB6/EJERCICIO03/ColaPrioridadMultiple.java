@@ -22,6 +22,21 @@ class ColaPrioridadMultiple {
         // agrego en la cola según prioridad
         queues[priority].add(x);
     }
+    
+    public String dequeue() throws ExceptionIsEmpty {
+        if (isEmpty()) {
+            throw new ExceptionIsEmpty("Cola vacía");
+        }
+
+        // recorro desde mayor prioridad
+        for (int i = levels - 1; i >= 0; i--) {
+            if (!queues[i].isEmpty()) {
+                return queues[i].poll();
+            }
+        }
+
+        return null;
+    }
 
     public boolean isEmpty() {
         // verifico si todas están vacías
