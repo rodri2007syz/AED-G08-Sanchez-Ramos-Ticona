@@ -39,4 +39,26 @@ class ColaArreglo {
         array[rear] = x;
         size++;
     }
+    public int dequeue() throws ExceptionIsEmpty {
+        if (isEmpty()) {
+            throw new ExceptionIsEmpty("Cola vacía");
+        }
+
+        int dato = array[front];
+
+        // incremento circular
+        front = (front + 1) % capacity;
+        size--;
+
+        return dato;
+    }
+
+    public int front() throws ExceptionIsEmpty {
+        if (isEmpty()) {
+            throw new ExceptionIsEmpty("Cola vacía");
+        }
+
+        // retorno el primero
+        return array[front];
+    }
 }
