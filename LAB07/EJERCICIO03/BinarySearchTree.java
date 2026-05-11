@@ -296,4 +296,27 @@ public class BinarySearchTree {
         // hojas por altura
         return leaves * height;
     }
+    public void drawBST(Node root, String space) {
+
+        if (root == null) {
+            return;
+        }
+
+        // muestro primero derecha
+        drawBST(root.right, space + "   ");
+
+        System.out.println(space + root.data);
+
+        // muestro izquierda
+        drawBST(root.left, space + "   ");
+    }
+    @Override
+    public String toString() {
+
+        drawBST(root, "");
+
+        return "";
+    }
+    
 }
+
