@@ -145,4 +145,73 @@ public class BinarySearchTree {
         // cuento todos los nodos
         return 1 + countAllNodes(root.left) + countAllNodes(root.right);
     }
+    public int countNodes(Node root) {
+
+        if (root == null) {
+            return 0;
+        }
+
+        // ignoro hojas
+        if (root.left == null && root.right == null) {
+            return 0;
+        }
+
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+
+    public int height(int x) {
+
+        Node current = root;
+
+        // busco el nodo
+        while (current != null) {
+
+            if (current.data == x) {
+                break;
+            }
+
+            if (x < current.data) {
+                current = current.left;
+            } else {
+                current = current.right;
+            }
+        }
+
+        // nodo no encontrado
+        if (current == null) {
+            return -1;
+        }
+
+        NodeQueue queue = new NodeQueue();
+
+        queue.enqueue(current);
+
+        int height = -1;
+
+        // recorrido por niveles
+        while (!queue.isEmpty()) {
+
+            int levelSize = 0;
+            NodeQueue tempQueue = new NodeQueue();
+
+            while (!queue.isEmpty()) {
+
+                Node node = queue.dequeue();
+                levelSize++;
+
+                if (node.left != null) {
+                    tempQueue.enqueue(node.left);
+                }
+
+                if (node.right != null) {
+                    tempQueue.enqueue(node.right);
+                }
+            }
+
+            queue = tempQueue;
+            height++;
+        }
+
+        return height;
+    }
 }
