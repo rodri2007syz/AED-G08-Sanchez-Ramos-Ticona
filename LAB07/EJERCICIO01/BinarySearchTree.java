@@ -80,4 +80,50 @@ public class BinarySearchTree {
             System.out.print(root.data + " ");
         }
     }
+    
+    public int findMin(Node root) {
+
+        // avanzo hasta el menor
+        while (root.left != null) {
+            root = root.left;
+        }
+
+        return root.data;
+    }
+
+    public int findMax(Node root) {
+
+        // avanzo hasta el mayor
+        while (root.right != null) {
+            root = root.right;
+        }
+
+        return root.data;
+    }
+
+    public int height(Node root) {
+
+        if (root == null) {
+            return -1;
+        }
+
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    public int countLeaves(Node root) {
+
+        if (root == null) {
+            return 0;
+        }
+
+        // encontré una hoja
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+
+        return countLeaves(root.left) + countLeaves(root.right);
+    }
 }
