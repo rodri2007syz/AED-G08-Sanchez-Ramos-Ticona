@@ -214,4 +214,42 @@ public class BinarySearchTree {
 
         return height;
     }
+    public int amplitude() {
+
+        int max = 0;
+
+        NodeQueue queue = new NodeQueue();
+
+        queue.enqueue(root);
+
+        // recorro nivel por nivel
+        while (!queue.isEmpty()) {
+
+            int count = 0;
+            NodeQueue tempQueue = new NodeQueue();
+
+            while (!queue.isEmpty()) {
+
+                Node node = queue.dequeue();
+                count++;
+
+                if (node.left != null) {
+                    tempQueue.enqueue(node.left);
+                }
+
+                if (node.right != null) {
+                    tempQueue.enqueue(node.right);
+                }
+            }
+
+            // guardo la mayor amplitud
+            if (count > max) {
+                max = count;
+            }
+
+            queue = tempQueue;
+        }
+
+        return max;
+    }
 }
