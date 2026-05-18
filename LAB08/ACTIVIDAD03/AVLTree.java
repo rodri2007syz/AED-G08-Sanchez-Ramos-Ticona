@@ -74,12 +74,58 @@ public class AVLTree extends BSTree {
         return node;
     }
 
+    private NodeAVL rotateSL(NodeAVL node) {
+
+        NodeAVL rightChild = (NodeAVL) node.right;
+
+        // muevo subárbol
+        node.right = rightChild.left;
+
+        rightChild.left = node;
+
+        return rightChild;
+    }
+
+    private NodeAVL rotateSR(NodeAVL node) {
+
+        NodeAVL leftChild = (NodeAVL) node.left;
+
+        // muevo subárbol
+        node.left = leftChild.right;
+
+        leftChild.right = node;
+
+        return leftChild;
+    }
+
     private NodeAVL balanceToLeft(NodeAVL node) {
+
+        NodeAVL rightChild = (NodeAVL) node.right;
+
+        // caso simple izquierda
+        if (rightChild.bf == 1) {
+
+            node.bf = 0;
+            rightChild.bf = 0;
+
+            node = rotateSL(node);
+        }
 
         return node;
     }
 
     private NodeAVL balanceToRight(NodeAVL node) {
+
+        NodeAVL leftChild = (NodeAVL) node.left;
+
+        // caso simple derecha
+        if (leftChild.bf == -1) {
+
+            node.bf = 0;
+            leftChild.bf = 0;
+
+            node = rotateSR(node);
+        }
 
         return node;
     }
