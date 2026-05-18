@@ -110,6 +110,35 @@ public class AVLTree extends BSTree {
 
             node = rotateSL(node);
         }
+	// rotación doble derecha izquierda
+        else if (rightChild.bf == -1) {
+
+            NodeAVL leftGrandChild = (NodeAVL) rightChild.left;
+
+            if (leftGrandChild.bf == 1) {
+
+                node.bf = -1;
+                rightChild.bf = 0;
+            }
+
+            else if (leftGrandChild.bf == -1) {
+
+                node.bf = 0;
+                rightChild.bf = 1;
+            }
+
+            else {
+
+                node.bf = 0;
+                rightChild.bf = 0;
+            }
+
+            leftGrandChild.bf = 0;
+
+            node.right = rotateSR(rightChild);
+
+            node = rotateSL(node);
+        }
 
         return node;
     }
@@ -123,6 +152,35 @@ public class AVLTree extends BSTree {
 
             node.bf = 0;
             leftChild.bf = 0;
+
+            node = rotateSR(node);
+        }
+	// rotación doble izquierda derecha
+        else if (leftChild.bf == 1) {
+
+            NodeAVL rightGrandChild = (NodeAVL) leftChild.right;
+
+            if (rightGrandChild.bf == 1) {
+
+                node.bf = 0;
+                leftChild.bf = -1;
+            }
+
+            else if (rightGrandChild.bf == -1) {
+
+                node.bf = 1;
+                leftChild.bf = 0;
+            }
+
+            else {
+
+                node.bf = 0;
+                leftChild.bf = 0;
+            }
+
+            rightGrandChild.bf = 0;
+
+            node.left = rotateSL(leftChild);
 
             node = rotateSR(node);
         }
