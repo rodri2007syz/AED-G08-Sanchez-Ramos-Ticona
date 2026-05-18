@@ -58,5 +58,49 @@ public class TestAVL {
 
         System.out.println("PRUEBA 5 RSL");
         System.out.println(avl5);
+	
+	// PRUEBA 6 RDR
+
+        AVLTree avl6 = new AVLTree();
+
+        avl6.insert(30);
+        avl6.insert(10);
+        avl6.insert(20);
+
+        System.out.println("PRUEBA 6 RDR");
+        System.out.println(avl6);
+
+        // PRUEBA 7 RDR
+
+        AVLTree avl7 = new AVLTree();
+
+        avl7.insert(50);
+        avl7.insert(30);
+        avl7.insert(40);
+
+        System.out.println("PRUEBA 7 RDR");
+        System.out.println(avl7);
+
+        // PRUEBA 8 RDL
+
+        AVLTree avl8 = new AVLTree();
+
+        avl8.insert(10);
+        avl8.insert(30);
+        avl8.insert(20);
+
+        System.out.println("PRUEBA 8 RDL");
+        System.out.println(avl8);
+
+        // PRUEBA 9 RDL
+
+        AVLTree avl9 = new AVLTree();
+
+        avl9.insert(40);
+        avl9.insert(60);
+        avl9.insert(50);
+
+        System.out.println("PRUEBA 9 RDL");
+        System.out.println(avl9);
     }
 }
