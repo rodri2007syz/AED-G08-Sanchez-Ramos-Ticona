@@ -1,4 +1,4 @@
-package ACTIVIDAD03;
+package EJERCICIO06;
 
 public class AVLTree extends BSTree {
 
@@ -74,7 +74,18 @@ public class AVLTree extends BSTree {
         return node;
     }
     
-    
+    // recorrido preorden
+    public void preOrder(Node root) {
+
+        if (root != null) {
+
+            System.out.print(root.data + " ");
+
+            preOrder(root.left);
+
+            preOrder(root.right);
+        }
+    }
 
     private NodeAVL rotateSL(NodeAVL node) {
 
