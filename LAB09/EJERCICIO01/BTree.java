@@ -211,4 +211,41 @@ public class BTree<E extends Comparable<E>> {
 
         return s;
     }
+    public boolean search(E cl) {
+
+        // inicio búsqueda
+        return search(root, cl);
+    }
+
+    private boolean search(BNode<E> current, E cl) {
+
+        // árbol vacío o clave no encontrada
+        if (current == null) {
+            return false;
+        }
+
+        int pos[] = new int[1];
+
+        // busco dentro del nodo
+        boolean found = current.searchNode(cl, pos);
+
+        // clave encontrada
+        if (found) {
+
+            System.out.println(
+                cl + " se encuentra en el nodo "
+                + current.getIdNode()
+                + " en la posición "
+                + pos[0]
+            );
+
+            return true;
+        }
+
+        // continúo por el hijo correspondiente
+        return search(
+                current.childs.get(pos[0]),
+                cl
+        );
+    }
 }
